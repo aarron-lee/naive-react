@@ -8,6 +8,20 @@ function handleChildren(children, newElement) {
   });
 }
 
+function handleProps(props, newElement) {
+  if (!props) return;
+  const propNames = Object.keys(props);
+
+  propNames.forEach(propName => {
+    if (newElement.propName) {
+      // DomNode has property, set it
+      newElement.propName = props[propName];
+    } else {
+      newElement.setAttribute(propName, props[propName]);
+    }
+  });
+}
+
 export function renderNode(vNode) {
   const { type, props, children } = vNode;
 
@@ -16,6 +30,7 @@ export function renderNode(vNode) {
     const newElement = document.createElement(type);
 
     handleChildren(children, newElement);
+    handleProps(props, newElement);
 
     return newElement;
   }
