@@ -6,4 +6,10 @@ export function createElement(type, props, children) {
   };
 }
 
-export default { createElement };
+export class Component {
+  constructor(props) {
+    this.props = props;
+  }
+}
+
+export default { Component, createElement };

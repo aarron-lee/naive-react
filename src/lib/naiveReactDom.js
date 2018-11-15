@@ -30,6 +30,14 @@ function handleProps(props, newElement) {
 export function renderNode(vNode) {
   const { type, props, children } = vNode;
 
+  if (typeof type === 'function' && type.toString().indexOf('class') === 0) {
+    // class component
+    const instance = new type(props);
+
+    const newDomNode = renderNode(instance.render());
+    return newDomNode;
+  }
+
   if (typeof type === 'function') {
     // functional component, recursively render
     return renderNode(type(props));
