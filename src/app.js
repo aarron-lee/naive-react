@@ -4,13 +4,9 @@ import NaiveReactDom from './lib/naiveReactDom.js';
 const root = document.getElementById('app');
 
 const Paragraph = props => {
-  return NaiveReact.createElement(
-    'p',
-    {
-      innerHTML: `this is the content of the paragraph: ${props.content}`
-    },
-    []
-  );
+  return NaiveReact.createElement('p', {
+    innerHTML: `this is the content of the paragraph: ${props.content}`
+  });
 };
 
 const CurrentParagraph = NaiveReact.createElement(Paragraph, { content: 'content from props!' });

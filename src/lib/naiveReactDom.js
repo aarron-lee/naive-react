@@ -1,4 +1,5 @@
 function handleChildren(children, newElement) {
+  if (!children) return;
   children.forEach(child => {
     if (typeof child === 'string') {
       newElement.appendChild(document.createTextNode(child));
