@@ -5,7 +5,9 @@ const root = document.getElementById('app');
 
 const Paragraph = props => {
   return NaiveReact.createElement('p', {
-    innerHTML: `this is the content of the paragraph: ${props.content}`
+    innerHTML: `this is the content of the paragraph: ${props.content}`,
+    className: 'paragraph1',
+    onClick: () => console.log('paragraph clicked!!')
   });
 };
 

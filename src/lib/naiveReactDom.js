@@ -17,6 +17,10 @@ function handleProps(props, newElement) {
     if (propName in newElement) {
       // DomNode has property, set it
       newElement[propName] = props[propName];
+    } else if (propName.length >= 2 && propName.slice(0, 2) === 'on') {
+      // prop is an event handler
+      const eventName = propName.slice(2).toLowerCase();
+      newElement.addEventListener(eventName, props[propName]);
     } else {
       newElement.setAttribute(propName, props[propName]);
     }
