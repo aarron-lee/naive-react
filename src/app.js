@@ -6,9 +6,9 @@ const root = document.getElementById('app');
 const Heading = NaiveReact.createElement(
   'h1',
   { style: 'color:red', id: 'main-heading', testProp: 'hello world' },
-  'Heading!'
+  ['Heading!']
 );
 
-const App = NaiveReact.createElement('div', null, Heading, 'child');
+const App = NaiveReact.createElement('div', null, [Heading, 'child']);
 
 NaiveReactDom.render(App, root);
