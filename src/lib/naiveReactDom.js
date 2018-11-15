@@ -13,9 +13,9 @@ function handleProps(props, newElement) {
   const propNames = Object.keys(props);
 
   propNames.forEach(propName => {
-    if (newElement.propName) {
+    if (propName in newElement) {
       // DomNode has property, set it
-      newElement.propName = props[propName];
+      newElement[propName] = props[propName];
     } else {
       newElement.setAttribute(propName, props[propName]);
     }
@@ -24,6 +24,11 @@ function handleProps(props, newElement) {
 
 export function renderNode(vNode) {
   const { type, props, children } = vNode;
+
+  if (typeof type === 'function') {
+    // functional component, recursively render
+    return renderNode(type(props));
+  }
 
   if (typeof type === 'string') {
     // type should be something like h1, div, etc
