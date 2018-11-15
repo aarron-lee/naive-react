@@ -27,14 +27,30 @@ function handleProps(props, newElement) {
   });
 }
 
+function updateComponent(component) {
+  // component is an instance of a class component
+  if (component.priorState !== component.state) {
+    // new state, rerender
+    const currentDomNode = component.domNode;
+    // replace currentDomNode
+    const newDomNode = renderNode(component.render());
+    component.domNode = newDomNode;
+    currentDomNode.parentNode.replaceChild(newDomNode, currentDomNode);
+  }
+}
+
 export function renderNode(vNode) {
   const { type, props, children } = vNode;
 
   if (typeof type === 'function' && type.toString().indexOf('class') === 0) {
     // class component
     const instance = new type(props);
+    Object.assign(instance, { updateComponent });
 
     const newDomNode = renderNode(instance.render());
+
+    instance.domNode = newDomNode;
+
     return newDomNode;
   }
 
